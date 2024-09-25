@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class CaesarCipher {
-    public static String encrypt(String text, int shift) {
+    public static String Encrypt(String text, int shift) {
         StringBuilder result = new StringBuilder();
 
         for (int i = 0; i < text.length(); i++) {
@@ -19,4 +19,10 @@ public class CaesarCipher {
         }
         return result.toString();
     }
+
+    public static String Decrypt(String text, int shift) {
+        return Encrypt(text, 26 - shift);
+    }
+
+    
 }

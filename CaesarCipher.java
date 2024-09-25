@@ -24,5 +24,16 @@ public class CaesarCipher {
         return Encrypt(text, 26 - shift);
     }
 
-    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the text to ENCRYPT: ");
+        String text = sc.nextLine();
+        System.out.println("Enter the SHIFT value: ");
+        int shift = sc.nextInt();
+        String encrypted = Encrypt(text, shift);
+        System.out.println("Encrypted text: " + encrypted);
+        String decrypted = Decrypt(encrypted, shift);
+        System.out.println("Decrypted text: " + decrypted);
+        sc.close();
+    }
 }

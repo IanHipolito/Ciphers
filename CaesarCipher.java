@@ -24,12 +24,28 @@ public class CaesarCipher {
         return Encrypt(text, 26 - shift);
     }
 
+    public static boolean isValidInputv(String text) {
+        return text.matches("[a-zA-Z]+");
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the text to ENCRYPT: ");
-        String text = sc.nextLine();
+        String text;
+        int shift;
+
+        while(true) {
+            System.out.println("Enter the text to ENCRYPT: ");
+            text = sc.nextLine();
+
+            if (isValidInputv(text)) {
+                break;
+            } else {
+                System.out.println("***ERROR: INVALID INPUT - PLEASE ONLY INPUT ALPHABATIC CHARACTERS***");
+            }
+        }
+
         System.out.println("Enter the SHIFT value: ");
-        int shift = sc.nextInt();
+        shift = sc.nextInt();
         String encrypted = Encrypt(text, shift);
         System.out.println("Encrypted text: " + encrypted);
         String decrypted = Decrypt(encrypted, shift);

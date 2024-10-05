@@ -1,84 +1,59 @@
 import java.util.Scanner;
 
-public class CaesarCipher {
-    // Method to encrypt the message using Caesar Cipher
-    public static String Encrypt(String text, int shift) {
+class CaesarCipher {
+    
+    // Encrypts text using a shift of s
+    public static StringBuffer encrypt(String text, int s) {
+        StringBuffer result = new StringBuffer();
 
-        // StringBuilder is used to store the resulting encrypted text.
-        StringBuilder result = new StringBuilder();
-
-        // Loop through each character of the input text
         for (int i = 0; i < text.length(); i++) {
-            // Get the character at the current index
-            char character = text.charAt(i);
+            char currentChar = text.charAt(i);
 
-            // Check if the character is an uppercase letter
-            if (Character.isUpperCase(character)) {
-                // Shift the character and wrap around if necessary, then add it to the result
-                char ch = (char)(((int) character + shift - 65) % 26 + 65);
+            if (Character.isUpperCase(currentChar)) {
+                char ch = (char)(((int)text.charAt(i) + s - 65) % 26 + 65);
                 result.append(ch);
-                // Check if the character is a lowercase letter
-            } else if (Character.isLowerCase(character)) {
-                // Shift the character and wrap around if necessary, then add it to the result
-                char ch = (char)(((int) character + shift - 97) % 26 + 97);
+            } else if (Character.isLowerCase(currentChar)){
+                char ch = (char)(((int)text.charAt(i) + s - 97) % 26 + 97);
                 result.append(ch);
             } else {
-                // If the character is not alphabetic, just add it to the result as is
-                result.append(character);
+                // If it's not a letter (space or punctuation), append it without modification
+                result.append(currentChar);
             }
         }
-        // Return the final encrypted text
-        return result.toString();
+        return result;
     }
 
-    // Method to decrypt the message (reverse the encryption using the same shift)
-    public static String Decrypt(String text, int shift) {
-        // To decrypt, we shift back by (26 - shift) positions
-        return Encrypt(text, 26 - shift);
+    // Decrypts text using a shift of s
+    public static StringBuffer decrypt(String text, int s) {
+        return encrypt(text, 26 - s);  // Reverse the encryption shift to decrypt
     }
 
-    // Method to validate that the input contains only alphabetic characters
-    public static boolean isValidInputv(String text) {
-        // Regex checks if the input consists only of alphabetic characters (a-z, A-Z)
-        return text.matches("[a-zA-Z]+");
-    }
-
+    // Main method to choose between encryption and decryption
     public static void main(String[] args) {
-        // Create a Scanner object to take input from the user.
-        Scanner sc = new Scanner(System.in);
-        // Variable to store the input text.
-        String text;
-        // Variable to store the shift value.
-        int shift;
+        Scanner scanner = new Scanner(System.in);
 
-        // Loop until the user provides valid input (only alphabetic characters)
-        while(true) {
-            System.out.println("Enter the text to ENCRYPT: ");
-             // Read the text from the user.
-            text = sc.nextLine();
+        // Get the user's choice
+        System.out.println("Please Input (1) If You Want To Encrypt or (2) If You Want To Decrypt: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
 
-            // Validate the input using the isValidInput method
-            if (isValidInputv(text)) {
-                // If the input is valid, exit the loop.
-                break;
-            } else {
-                System.out.println("***ERROR: INVALID INPUT - PLEASE ONLY INPUT ALPHABATIC CHARACTERS***");
-            }
+        // Get the text input
+        System.out.println("Enter The Text:");
+        String text = scanner.nextLine();
+
+        // Get the shift value
+        System.out.println("Enter The Shift Value:");
+        int s = scanner.nextInt();
+
+        // Process based on user choice
+        if (choice == 1) {
+            System.out.println("Encrypted Text: " + encrypt(text, s));
+        } else if (choice == 2) {
+            System.out.println("Decrypted Text: " + decrypt(text, s));
+        } else {
+            System.out.println("Invalid Choice - Please Enter Either (1) or (2)");
         }
 
-        // Get the shift value from the user
-        System.out.println("Enter the SHIFT value: ");
-        // Read the shift value from the user.
-        shift = sc.nextInt();
-        // Encrypt the input text using the specified shift value
-        String encrypted = Encrypt(text, shift);
-        // Output the encrypted text.
-        System.out.println("Encrypted text: " + encrypted);
-        // Decrypt the encrypted text to verify correctness
-        String decrypted = Decrypt(encrypted, shift);
-        // Output the decrypted text.
-        System.out.println("Decrypted text: " + decrypted);
-        // Close the Scanner to free up resources.
-        sc.close();
+        scanner.close();
     }
 }

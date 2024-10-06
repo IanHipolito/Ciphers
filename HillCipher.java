@@ -86,5 +86,32 @@ public class HillCipher {
         }
         return -1; // Inverse doesn't exist
     }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input key matrix
+        System.out.println("Enter the key matrix (2x2) row-wise (4 numbers):");
+        int[][] keyMatrix = new int[MATRIX_SIZE][MATRIX_SIZE];
+        for (int i = 0; i < MATRIX_SIZE; i++) {
+            for (int j = 0; j < MATRIX_SIZE; j++) {
+                keyMatrix[i][j] = scanner.nextInt();
+            }
+        }
+
+        // Input plaintext
+        System.out.println("Enter the plaintext:");
+        String plaintext = scanner.next();
+        
+        // Encryption
+        String encryptedText = encrypt(plaintext, keyMatrix);
+        System.out.println("Encrypted Text: " + encryptedText);
+        
+        // Decryption
+        String decryptedText = decrypt(encryptedText, keyMatrix);
+        System.out.println("Decrypted Text: " + decryptedText);
+
+        scanner.close();
+    }
     
-}
+} 

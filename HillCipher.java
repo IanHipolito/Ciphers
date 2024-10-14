@@ -116,17 +116,30 @@ public class HillCipher {
             }
         }
 
-        // Input plaintext
-        System.out.println("Enter the plaintext:");
-        String plaintext = scanner.next();
-        
-        // Encryption
-        String encryptedText = encrypt(plaintext, keyMatrix);
-        System.out.println("Encrypted Text: " + encryptedText);
-        
-        // Decryption
-        String decryptedText = decrypt(encryptedText, keyMatrix);
-        System.out.println("Decrypted Text: " + decryptedText);
+        // Ask the user to choose encryption or decryption
+        System.out.println("Please Input (1) If You Want To Encrypt or (2) If You Want To Decrypt: ");
+        int choice = scanner.nextInt();
+
+        // Handle user choice
+        if (choice == 1) {
+            // Input plaintext
+            System.out.println("Enter the plaintext:");
+            String plaintext = scanner.next();
+
+            // Perform encryption
+            String encryptedText = encrypt(plaintext, keyMatrix);
+            System.out.println("Encrypted Text: " + encryptedText);
+        } else if (choice == 2) {
+            // Input ciphertext
+            System.out.println("Enter the ciphertext:");
+            String ciphertext = scanner.next();
+
+            // Perform decryption
+            String decryptedText = decrypt(ciphertext, keyMatrix);
+            System.out.println("Decrypted Text: " + decryptedText);
+        } else {
+            System.out.println("Invalid option. Please choose either 1 or 2.");
+        }
 
         scanner.close();
     }  

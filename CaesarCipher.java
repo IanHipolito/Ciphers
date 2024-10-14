@@ -4,15 +4,19 @@ class CaesarCipher {
     
     // Encrypts text using a shift of s
     public static StringBuffer encrypt(String text, int s) {
-        StringBuffer result = new StringBuffer();
+        StringBuffer result = new StringBuffer(); // StringBuffer to hold the encrypted result
 
+        // Loop over each character in the input text
         for (int i = 0; i < text.length(); i++) {
-            char currentChar = text.charAt(i);
+            char currentChar = text.charAt(i); // Get the current character from the input text
 
+            // If the current character is an uppercase letter
             if (Character.isUpperCase(currentChar)) {
+                // Shift the character based on 'A' and append to the result
                 char ch = (char)(((int)text.charAt(i) + s - 65) % 26 + 65);
                 result.append(ch);
-            } else if (Character.isLowerCase(currentChar)){
+            } else if (Character.isLowerCase(currentChar)){ // If the current character is a lowercase letter
+                // Shift the character based on 'a' and append to the result
                 char ch = (char)(((int)text.charAt(i) + s - 97) % 26 + 97);
                 result.append(ch);
             } else {
@@ -20,7 +24,8 @@ class CaesarCipher {
                 result.append(currentChar);
             }
         }
-        return result;
+
+        return result; // Return the final encrypted string
     }
 
     // Decrypts text using a shift of s

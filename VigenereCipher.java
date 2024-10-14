@@ -4,7 +4,7 @@ public class VigenereCipher {
 
     // Function to generate the key in cyclic manner until its length equals the length of original text
     public static String generateKey(String str, String key) {
-        int x = str.length(); // Length of the original text
+        // int x = str.length(); // Length of the original text
         StringBuilder newKey = new StringBuilder(key); // Build the new key using StringBuilder for mutability
 
         // Repeat the key until its length matches the original text
